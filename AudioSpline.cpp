@@ -29,7 +29,7 @@ AAudioSpline::AAudioSpline(const FObjectInitializer& ObjectInitializer)
 
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
-	PrimaryActorTick.TickGroup = TG_DuringPhysics;  // ???
+	PrimaryActorTick.TickGroup = TG_DuringPhysics;  
 	PrimaryActorTick.TickInterval = UpdateInterval;
 }
 
