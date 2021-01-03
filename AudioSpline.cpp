@@ -50,6 +50,20 @@ void AAudioSpline::Tick(float DeltaTime)
 	}
 	FVector PlayerLocation = PlayerController->GetPawn()->GetActorLocation();
 
+
+	// Update the AudioComponent Location if the Player is moving
+	if (IsPlayerMoving(PlayerLocation))
+	{
+		MoveVirtualSpeaker(PlayerLocation);
+	}
+	else 
+	{
+#if WITH_EDITOR
+		// Debug visualisation BLACK
+		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().Black, false, UpdateInterval);
+		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval);
+#endif // #if WITH_EDITOR
+	}
 	if (IsPlayerInRange(PlayerLocation))
 	{
 		if (!AudioComponent->IsPlaying())
@@ -66,20 +80,6 @@ void AAudioSpline::Tick(float DeltaTime)
 			AudioComponent->FadeOut(0.1f, 0.0f, EAudioFaderCurve::Logarithmic);
 			AudioComponent->Stop();
 		}
-	}
-
-	// Updare the AudioComponent Location if the Player is moving
-	if (IsPlayerMoving(PlayerLocation))
-	{
-		MoveVirtualSpeaker(PlayerLocation);
-	}
-	else 
-	{
-#if WITH_EDITOR
-		// Debug visualisation BLACK
-		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().Black, false, UpdateInterval);
-		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval);
-#endif // #if WITH_EDITOR
 	}
 }
 
