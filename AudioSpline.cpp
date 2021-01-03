@@ -59,7 +59,7 @@ void AAudioSpline::Tick(float DeltaTime)
 	else 
 	{
 #if WITH_EDITOR
-		// Debug visualisation BLACK
+		// Debug visualisation BLACK. The Player is NOT moving
 		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().Black, false, UpdateInterval);
 		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval);
 #endif // #if WITH_EDITOR
@@ -93,13 +93,13 @@ void AAudioSpline::MoveVirtualSpeaker(const FVector &PlayerLocation)
 	AudioComponent->SetWorldLocation(ClosestPoint); 
 
 #if WITH_EDITOR
-	// Debug visualisation WHITE
+	// Debug visualisation WHITE. The Player is moving.
 	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().White, false, UpdateInterval);
 	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().White, false, UpdateInterval);
 #endif // #if WITH_EDITOR
 }
 
-// Return whether the player is moving 
+// Return whether the player is moving or not. 
 bool AAudioSpline::IsPlayerMoving(const FVector &PlayerLocation)
 {
 	CurrentPlayerPosition = PlayerLocation;
