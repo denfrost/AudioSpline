@@ -46,6 +46,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float UpdateInterval = 0.15f;
 
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 private:
 	// Return a ptr to PlayerController
 	APlayerController* GetFirstLocalPlayerController() const;

@@ -28,8 +28,13 @@ AAudioSpline::AAudioSpline(const FObjectInitializer& ObjectInitializer)
 	AudioComponent->SetupAttachment(RootComponent);
 
 	PrimaryActorTick.bCanEverTick = true;
-	PrimaryActorTick.bStartWithTickEnabled = true;
-	PrimaryActorTick.TickGroup = TG_DuringPhysics;  
+	PrimaryActorTick.bStartWithTickEnabled = true; 
+}
+
+// Called when the game starts or when spawned
+void AAudioSpline::BeginPlay()
+{
+	Super::BeginPlay();
 	PrimaryActorTick.TickInterval = UpdateInterval;
 }
 
