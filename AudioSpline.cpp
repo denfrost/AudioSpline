@@ -64,6 +64,8 @@ void AAudioSpline::Tick(float DeltaTime)
 		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval);
 #endif // #if WITH_EDITOR
 	}
+
+	// Play audio component if the player is in range, else Stop it.
 	if (IsPlayerInRange(PlayerLocation))
 	{
 		if (!AudioComponent->IsPlaying())
