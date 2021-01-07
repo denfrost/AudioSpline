@@ -1,0 +1,9 @@
+C:\Users\LuigiP\Documents\Unreal Projects\AudioSpline\Plugins\AudioSplinePlugin\Intermediate\Build\Win64\UE4Editor\Development\AudioSplinePlugin\Definitions.AudioSplinePlugin.h
+C:/Users/LuigiP/Documents/Unreal Projects/AudioSpline/Plugins/AudioSplinePlugin/Intermediate/Build/Win64/UE4Editor/Inc/AudioSplinePlugin/AudioSpline.gen.cpp
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+C:\Users\LuigiP\Documents\Unreal Projects\AudioSpline\Plugins\AudioSplinePlugin\Source\AudioSplinePlugin/Public/AudioSpline.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\Sound/AmbientSound.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\AmbientSound.generated.h
+c:\users\luigip\documents\unreal projects\audiospline\plugins\audiosplineplugin\intermediate\build\win64\ue4editor\inc\audiosplineplugin\AudioSpline.generated.h
+C:/Users/LuigiP/Documents/Unreal Projects/AudioSpline/Plugins/AudioSplinePlugin/Intermediate/Build/Win64/UE4Editor/Inc/AudioSplinePlugin/AudioSplinePlugin.init.gen.cpp

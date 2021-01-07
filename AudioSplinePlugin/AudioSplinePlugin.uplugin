@@ -1,0 +1,25 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "AudioSpline",
+	"Description": "This Actor moves the location of the Audio Component to the closest point on the Spline to the player location.",
+	"Category": "Audio",
+	"CreatedBy": "Luigi Platania",
+	"CreatedByURL": "https://www.luigiplatania.net/",
+	"DocsURL": "https://github.com/luigiplatania94/AudioSpline/blob/main/README.md",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AudioSplinePlugin",
+			"Type": "Runtime",
+            "LoadingPhase": "Default",
+            "BlacklistPlatforms":  "Android"
+		}
+	]
+}
