@@ -5,7 +5,8 @@ Audio Spline made in Unreal Engine 4.26.
 
 ### Description
 It moves the location of the audio component to the closest point on the spline to the player location.
- 
+
+
 ### Installing the Plugin
 This plugin was made in UE 4.26.
 After you download the repository, extract the zip archive. Copy the folders "AudioSplinePlugin" into the "Plugins" folder of your UE4 project. 
