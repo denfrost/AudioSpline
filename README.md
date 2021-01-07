@@ -6,4 +6,4 @@ Audio Spline made in Unreal Engine 4.26.
 ### Description
 It moves the location of the audio component to the closest point on the spline to the player location.
  
-### How to install the Plugin
+### Installing the Plugin
