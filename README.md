@@ -20,3 +20,4 @@ Set your Sound Cue in the Details panel.
 ![](Documentation/Images/Image03.PNG)
 
 Alternatevely you can create a blueprint class 
+![](Documentation/Images/Image04.PNG)
