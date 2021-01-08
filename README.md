@@ -16,10 +16,11 @@ You will be able to see it in the Editor only if you toggle the "Show Plugin Con
 
 ### How to use the Plugin
 Drag the AudioSpline Actor into the world and add as many spline points as you need.
+To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it. 
 ![](Documentation/Images/Gif01.gif)
 
 Set your Sound Cue in the Details panel.   
 ![](Documentation/Images/Image05.PNG)
 
-Alternatevely you can create a blueprint class and do the same step above. This will allow you to add your unique blueprint logic to the Audio Spline
+Alternatevely you can create a blueprint class and do the same step above. This will allow you to add your unique blueprint logic to the Audio Spline.
 ![](Documentation/Images/Image04.PNG)
