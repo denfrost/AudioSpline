@@ -17,6 +17,7 @@ You will be able to see it in the Editor only if you toggle the "Show Plugin Con
 ### How to use the Plugin
 Drag the AudioSpline Actor into the world and add as many spline points as you need.
 ![](Documentation/Images/Gif01.gif)
+
 Set your Sound Cue in the Details panel.   
 ![](Documentation/Images/Image05.PNG)
 
