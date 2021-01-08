@@ -25,28 +25,36 @@ public:
 	// Constructor
 	AAudioSpline(const FObjectInitializer& ObjectInitializer);
 
+	/*
+		Functions
+	*/
 	// Function called every frame on this Actor
 	virtual void Tick(float DeltaTime) override;
 
-	// Change the location of the UAudioComponent along the Spline
+	// Change the location of the AudioComponent
 	void MoveVirtualSpeaker(const FVector &PlayerLocation);
 
-	// Check if the player is moving or not
+	// Check if the player is moving 
 	bool IsPlayerMoving(const FVector &PlayerLocation);
 
 	// Check if the player is in range
-	bool IsPlayerInRange(const FVector &PlayerLocation);
+	bool IsPlayerInRange(const FVector &PlayerLocation) const;
 
+	/*
+		Components
+	*/
 	USplineComponent* SplineComponent;
-
 	UAudioComponent* AudioComponent;
 
+	/*
+		Variables
+	*/
 	// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		float Range = 1500.0f;
-
+	float Range = 1500.0f;
+	// Tick interval
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		float UpdateInterval = 0.15f;
+	float UpdateInterval = 0.15f;
 
 protected:
 	// Called when the game starts or when spawned

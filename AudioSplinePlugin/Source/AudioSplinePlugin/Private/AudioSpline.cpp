@@ -71,8 +71,8 @@ void AAudioSpline::Tick(float DeltaTime)
 	{
 #if WITH_EDITOR
 		// Debug visualisation BLACK. The Player is NOT moving
-		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().Black, false, UpdateInterval);
-		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval);
+		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().Black, false, UpdateInterval + 0.01);
+		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval + 0.01);
 #endif // #if WITH_EDITOR
 	}
 
@@ -105,13 +105,13 @@ void AAudioSpline::MoveVirtualSpeaker(const FVector &PlayerLocation)
 
 #if WITH_EDITOR
 	// Debug visualisation WHITE. The Player is moving.
-	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().White, false, UpdateInterval);
-	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().White, false, UpdateInterval);
+	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().White, false, UpdateInterval + 0.01);
+	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().White, false, UpdateInterval + 0.01);
 #endif // #if WITH_EDITOR
 }
 
-// Return whether the player is moving or not. 
-bool AAudioSpline::IsPlayerMoving(const FVector &PlayerLocation)
+// Return true if the player is moving. 
+bool AAudioSpline::IsPlayerMoving(const FVector &PlayerLocation)  
 {
 	CurrentPlayerPosition = PlayerLocation;
 	if (CurrentPlayerPosition == OldPlayerPosition)
@@ -126,8 +126,8 @@ bool AAudioSpline::IsPlayerMoving(const FVector &PlayerLocation)
 	}
 }
 
-// Return whether the player is in range
-bool AAudioSpline::IsPlayerInRange(const FVector &PlayerLocation)
+// Return true if the player is in range
+bool AAudioSpline::IsPlayerInRange(const FVector &PlayerLocation) const
 {
 	FVector AudioComponentLocation = AudioComponent->GetComponentLocation();
 	float DistanceToPlayer = FVector::Dist(PlayerLocation, AudioComponentLocation);
