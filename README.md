@@ -21,5 +21,5 @@ Drag the AudioSpline Actor into the world and add as many spline points as you n
 Set your Sound Cue in the Details panel.   
 ![](Documentation/Images/Image05.PNG)
 
-Alternatevely you can create a blueprint class 
+Alternatevely you can create a blueprint class and do the same step above. This will allow you to add your unique blueprint logic to the Audio Spline
 ![](Documentation/Images/Image04.PNG)
