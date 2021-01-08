@@ -17,7 +17,7 @@ You will be able to see it in the Editor only if you toggle the "Show Plugin Con
 ### How to use the Plugin
 Drag the AudioSpline Actor into the world and add as many spline points as you need.
 Set your Sound Cue in the Details panel.   
-![](Documentation/Images/Image03.PNG)
+![](Documentation/Images/Image05.PNG)
 
 Alternatevely you can create a blueprint class 
 ![](Documentation/Images/Image04.PNG)
