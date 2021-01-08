@@ -10,16 +10,22 @@
 	"DocsURL": "https://github.com/luigiplatania94/AudioSpline/blob/main/README.md",
 	"MarketplaceURL": "",
 	"SupportURL": "",
+	"EngineVersion": "4.26.0",
 	"CanContainContent": true,
 	"IsBetaVersion": true,
-	"IsExperimentalVersion": false,
-	"Installed": false,
+	"Installed": true,
 	"Modules": [
 		{
 			"Name": "AudioSplinePlugin",
 			"Type": "Runtime",
-            "LoadingPhase": "Default",
-            "BlacklistPlatforms":  "Android"
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32",
+				"Mac",
+				"PS4",
+				"XboxOne"
+			]
 		}
 	]
 }
