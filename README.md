@@ -28,3 +28,7 @@ Set your Sound Cue in the Details panel.
 #### Using a Blueprint Class
 Create a blueprint class and do the same step above. This will allow you to add your unique blueprint logic to the Audio Spline.
 ![](Documentation/Images/Image04.PNG)
+
+### How to contact me
+For any feedback please send me an email: 
+luigiplatania94@gmail.com
