@@ -10,7 +10,7 @@ It moves the location of the audio component to the closest point on the spline 
 4.26
 
 ### Supported Platforms
-Windows 32-bit, Windows 64-bit, MacOS, Playstation 4 and Xbox one.
+Win 32, Win 64, MacOS, Playstation 4 and Xbox one.
 
 ### How to install the Plugin 
 After you download the repository, extract the zip archive. Copy the folders "AudioSplinePlugin" into the "Plugins" folder of your UE4 project. 
