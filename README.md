@@ -39,7 +39,7 @@ Right click on the C++ Actor and select "Create Blueprint Class based on Audio S
 Choose a name and a directory for your Blueprint class.
 ![](Documentation/Images/Image07.PNG)
 
-Set your Sound Cue in the Details panel.   
+Set your Sound Cue in the Details panel. Then click Compile and Save.
 ![](Documentation/Images/Image06.PNG)
 
 Drag the BP_AudioSpline Actor into the world and add as many spline points as you need. To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it.
