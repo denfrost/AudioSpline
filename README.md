@@ -30,8 +30,12 @@ Set your Sound Cue in the Details panel.
 ![](Documentation/Images/Image05.PNG)
 
 #### Using a Blueprint Class
-Create a blueprint class and do the same step above. This will allow you to add your unique blueprint logic to the Audio Spline.
+This will allow you to add your unique blueprint logic to the Audio Spline.
+Right click on the C++ Actor and select "Create Blueprint Class based on Audio Spline". 
 ![](Documentation/Images/Image04.PNG)
+
+Set your Sound Cue in the Details panel.   
+![](Documentation/Images/Image06.PNG)
 
 ### How to contact me
 For any feedback please send me an email: 
