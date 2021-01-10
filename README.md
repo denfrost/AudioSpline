@@ -16,7 +16,7 @@ Win 32, Win 64, MacOS, Playstation 4 and Xbox one.
 After you download the repository, extract the zip archive. Copy the folders "AudioSplinePlugin" into the "Plugins" folder of your UE4 project. 
 If you don’t have a Plugins folder in your project folder yet, just create one.
 You will be able to see it in the Editor only if you toggle the "Show Plugin Content" on the "View Options".
-![](Documentation/Images/Image02.PNG)
+![](Documentation/Images/Image08.PNG)
 
 ### How to use the Plugin
 There are two ways of using this tool. You can simply use the C++ Actor or you can create a Blueprint class out of it.
