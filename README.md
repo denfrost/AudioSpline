@@ -15,6 +15,7 @@ Win 32, Win 64, MacOS, Playstation 4 and Xbox one.
 ### How to install the Plugin 
 After you download the repository, extract the zip archive. Copy the folders "AudioSplinePlugin" into the "Plugins" folder of your UE4 project. 
 If you don’t have a Plugins folder in your project folder yet, just create one.
+![](Documentation/Images/Image09.PNG)
 You will be able to see it in the Editor only if you toggle the "Show Plugin Content" on the "View Options".
 ![](Documentation/Images/Image08.PNG)
 
