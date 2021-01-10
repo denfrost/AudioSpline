@@ -42,6 +42,7 @@ Set your Sound Cue in the Details panel.
 ![](Documentation/Images/Image06.PNG)
 
 Drag the BP_AudioSpline Actor into the world and add as many spline points as you need. To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it.
+![](Documentation/Images/Gif02.gif)
 
 ### How to contact me
 For any feedback please send me an email: 
