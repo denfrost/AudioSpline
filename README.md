@@ -47,7 +47,7 @@ Drag the BP_AudioSpline Actor into the world and add as many spline points as yo
 ![](Documentation/Images/Gif03.gif)
 
 ### How it works
-![](Documentation/Images/Image10.PNG)
+![](Documentation/Images/Image11.PNG)
 
 ### How to contact me
 For any feedback please send me an email: 
