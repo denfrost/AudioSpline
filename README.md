@@ -52,6 +52,7 @@ Drag the BP_AudioSpline Actor into the world and add as many spline points as yo
 You can change the Update Interval (Tick Interval) and the Range either on each instance of the actor or on the Blueprint class.
 
 ![](Documentation/Images/Image12.png)
+![](Documentation/Images/Image13.png)
 
 ### How to contact me
 For any feedback please send me an email: 
