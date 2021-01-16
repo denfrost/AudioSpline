@@ -7,7 +7,7 @@ Audio Spline made in Unreal Engine 4.26.
 It moves the location of the audio component to the closest point on the spline to the player location.
 
 ### Supported Engine Versions
-4.26
+4.26 / 4.25
 
 ### Supported Platforms
 Win 32, Win 64, MacOS, Playstation 4 and Xbox one.
