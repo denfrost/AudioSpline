@@ -62,9 +62,9 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData[] = {
 		{ "Category", "AudioSpline" },
-		{ "Comment", "/*\n\x09\x09Variables\n\x09*/// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range\n" },
+		{ "Comment", "/*\n\x09\x09VARIABLES\n\x09*/// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range\n" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
-		{ "ToolTip", "Variables\n// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range" },
+		{ "ToolTip", "VARIABLES\n// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range" },
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range = { "Range", nullptr, (EPropertyFlags)0x0010000000000015, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, Range), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData)) };
@@ -108,7 +108,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AAudioSpline, 3113740943);
+	IMPLEMENT_CLASS(AAudioSpline, 1561232627);
 	template<> AUDIOSPLINEPLUGIN_API UClass* StaticClass<AAudioSpline>()
 	{
 		return AAudioSpline::StaticClass();

@@ -4,8 +4,8 @@
 	Luigi Platania
 	https://www.luigiplatania.net/
 
-	Documentation:
-	https://github.com/luigiplatania94/AudioSpline/blob/main/README.md
+	Email:
+	luigiplatania94@gmail.com
 =============================================================================*/
 
 #include "Components/ActorComponent.h"
@@ -25,7 +25,6 @@ AAudioSpline::AAudioSpline(const FObjectInitializer& ObjectInitializer)
 	SplineComponent = CreateDefaultSubobject<USplineComponent>(TEXT("SplineComponent"));
 	RootComponent = SplineComponent;
 	SplineComponent->SetGenerateOverlapEvents(false);
-	SplineComponent->SetCanEverAffectNavigation(false);
 
 	AudioComponent = GetAudioComponent();
 	AudioComponent->SetupAttachment(RootComponent);
@@ -71,6 +70,7 @@ void AAudioSpline::Tick(float DeltaTime)
 	{
 #if WITH_EDITOR
 		// Debug visualisation BLACK. The Player is NOT moving
+		// The life-time of the sphere is set to be UpdateInterval + 0.01 in order to avoid an flashing effect
 		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().Black, false, UpdateInterval + 0.01);
 		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval + 0.01);
 #endif // #if WITH_EDITOR
@@ -105,6 +105,7 @@ void AAudioSpline::MoveVirtualSpeaker(const FVector &PlayerLocation)
 
 #if WITH_EDITOR
 	// Debug visualisation WHITE. The Player is moving.
+	// The life-time of the sphere is set to be UpdateInterval + 0.01 in order to avoid an flashing effect
 	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().White, false, UpdateInterval + 0.01);
 	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().White, false, UpdateInterval + 0.01);
 #endif // #if WITH_EDITOR

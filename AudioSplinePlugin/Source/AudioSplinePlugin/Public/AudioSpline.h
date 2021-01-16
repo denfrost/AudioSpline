@@ -1,11 +1,11 @@
 /*=============================================================================
-	AudioSpline.cpp
+	AudioSpline.h
 
 	Luigi Platania
 	https://www.luigiplatania.net/
 
-	Documentation:
-	https://github.com/luigiplatania94/AudioSpline/blob/main/README.md
+	Email:
+	luigiplatania94@gmail.com
 =============================================================================*/
 
 #pragma once
@@ -26,7 +26,7 @@ public:
 	AAudioSpline(const FObjectInitializer& ObjectInitializer);
 
 	/*
-		Functions
+		FUNCTIONS
 	*/
 	// Function called every frame on this Actor
 	virtual void Tick(float DeltaTime) override;
@@ -41,13 +41,13 @@ public:
 	bool IsPlayerInRange(const FVector &PlayerLocation) const;
 
 	/*
-		Components
+		COMPONENTS
 	*/
 	USplineComponent* SplineComponent;
 	UAudioComponent* AudioComponent;
 
 	/*
-		Variables
+		VARIABLES
 	*/
 	// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
