@@ -47,6 +47,13 @@ Drag the BP_AudioSpline Actor into the world and add as many spline points as yo
 ![](Documentation/Images/Gif03.gif)
 
 ### How it works
+It's an Actor Class that inherits from AAmbientSound.
+
+#### Components
+- AudioComponent1 
+- SplineComponent
+
+#### Tick 
 ![](Documentation/Images/Image11.PNG)
 
 You can change the Update Interval (Tick Interval) and the Range either on each instance of the actor or on the Blueprint class.
