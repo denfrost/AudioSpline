@@ -22,10 +22,12 @@
 AAudioSpline::AAudioSpline(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	// Initialise the Spline Component and set it to be the Root
 	SplineComponent = CreateDefaultSubobject<USplineComponent>(TEXT("SplineComponent"));
 	RootComponent = SplineComponent;
 	SplineComponent->SetGenerateOverlapEvents(false);
 
+	// Initialise the Audio Component and attach it to the Root
 	AudioComponent = GetAudioComponent();
 	AudioComponent->SetupAttachment(RootComponent);
 
@@ -37,12 +39,14 @@ AAudioSpline::AAudioSpline(const FObjectInitializer& ObjectInitializer)
 void AAudioSpline::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Set the Tick Interval equal to the user-defined Update Interval
 	PrimaryActorTick.TickInterval = UpdateInterval;
 
+	// Print an Error if the Audio Spline Actor does not have a Sound Cue
 #if WITH_EDITOR
-	if (!AudioComponent->Sound)
+	if (bDebug && !AudioComponent->Sound)
 	{
-		// Print an Error if the Audio Spline Actor does not have a Sound Cue
 		UE_LOG(LogTemp, Error, TEXT("%s does not have a Sound Cue"), *GetName());
 	}
 #endif // #if WITH_EDITOR
@@ -53,27 +57,23 @@ void AAudioSpline::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	APawn* LocalPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	if (!LocalPawn)
-	{
-		return;
-	}
-	FVector PlayerLocation = LocalPawn->GetActorLocation();
+	// Store the player location at the given time
+	FVector PlayerLocation = GetPlayerLocation();
 
-
-	// Update the AudioComponent Location if the Player is moving
+	// Update the main Audio Component Location if the Player is moving
 	if (IsPlayerMoving(PlayerLocation))
 	{
+		// Move the main Audio Component to the point on the curve that is closest to the listener's position
 		MoveVirtualSpeaker(PlayerLocation);
 	}
 	else
 	{
-#if WITH_EDITOR
-		// Debug visualisation BLACK. The Player is NOT moving
-		// The life-time of the sphere is set to be UpdateInterval + 0.01 in order to avoid an flashing effect
-		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().Black, false, UpdateInterval + 0.01);
-		DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().Black, false, UpdateInterval + 0.01);
-#endif // #if WITH_EDITOR
+		// Debug visualisation BLACK/RED. The Player is NOT moving
+		if (bDebug)
+		{
+			// Debug the main Audio Componet
+			Debug(AudioComponent->GetComponentLocation(), FColor::Black);
+		}
 	}
 
 	// Play audio component if the player is in range, else Stop it.
@@ -82,33 +82,29 @@ void AAudioSpline::Tick(float DeltaTime)
 		if (!AudioComponent->IsPlaying())
 		{
 			// FadeIn the sound if the player is in range
-			AudioComponent->FadeIn(0.1f, 1.0f, 0.0f, EAudioFaderCurve::Logarithmic);
+			AudioComponent->FadeIn(0.5f, 1.0f, 0.0f, EAudioFaderCurve::Logarithmic);
 		}
 	}
-	else
+	else if (AudioComponent->IsPlaying())
 	{
-		if (AudioComponent->IsPlaying())
-		{
 			// FadeOut and Stop the sound if the player is NOT in range
-			AudioComponent->FadeOut(0.1f, 0.0f, EAudioFaderCurve::Logarithmic);
-			AudioComponent->Stop();
-		}
+			AudioComponent->FadeOut(0.5f, 0.0f, EAudioFaderCurve::Logarithmic);
 	}
 }
 
-// Change the location of the AudioComponent along the SplineComponent
+// Change the location of the AudioComponent along the SplineComponent and update che CurrentSourcePosition
 void AAudioSpline::MoveVirtualSpeaker(const FVector &PlayerLocation)
 {
 	// Return the closest point on the spline to the PlayerLocation
 	FVector ClosestPoint = SplineComponent->FindLocationClosestToWorldLocation(PlayerLocation, ESplineCoordinateSpace::World);
 	AudioComponent->SetWorldLocation(ClosestPoint);
 
-#if WITH_EDITOR
-	// Debug visualisation WHITE. The Player is moving.
-	// The life-time of the sphere is set to be UpdateInterval + 0.01 in order to avoid an flashing effect
-	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), 100.0f, 16, FColor().White, false, UpdateInterval + 0.01);
-	DrawDebugSphere(GetWorld(), AudioComponent->GetComponentLocation(), Range, 32, FColor().White, false, UpdateInterval + 0.01);
-#endif // #if WITH_EDITOR
+	// Debug visualisation WHITE/YELLO. The Player is moving.
+	if (bDebug)
+	{
+		// Debug the main Audio Componet
+		Debug(AudioComponent->GetComponentLocation(), FColor::White);
+	}
 }
 
 // Return true if the player is moving. 
@@ -141,4 +137,25 @@ bool AAudioSpline::IsPlayerInRange(const FVector &PlayerLocation) const
 	{
 		return false;
 	}
+}
+
+// Draw Debug
+void AAudioSpline::Debug(FVector DebugLocation, FColor Color) const
+{
+#if WITH_EDITOR
+	// The life-time of the sphere is set to be UpdateInterval + 0.01 in order to avoid a flashing effect
+	DrawDebugSphere(GetWorld(), DebugLocation, 100.0f, 16, Color, false, UpdateInterval + 0.01);
+	DrawDebugSphere(GetWorld(), DebugLocation, Range, 32, Color, false, UpdateInterval + 0.01);
+#endif // #if WITH_EDITOR
+}
+
+// Get Player Location 
+FVector AAudioSpline::GetPlayerLocation() const
+{
+	APawn* LocalPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	if (!LocalPawn)
+	{
+		return FVector();
+	}
+	return LocalPawn->GetActorLocation();
 }

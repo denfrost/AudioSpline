@@ -25,13 +25,34 @@ public:
 	// Constructor
 	AAudioSpline(const FObjectInitializer& ObjectInitializer);
 
-	/*
-		FUNCTIONS
-	*/
 	// Function called every frame on this Actor
 	virtual void Tick(float DeltaTime) override;
 
-	// Change the location of the AudioComponent
+	// Distance between main AudioComponent and Player. The sound is Stopped when the player goes beyond the Range
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float Range = 15000.0f;
+
+	// Tick interval
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float UpdateInterval = 0.15f;
+
+	// Debug
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool bDebug = false;
+
+	// The DualSource spawns a new Audio Source if the closest location jumps above a threshold
+	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadOnly)
+	bool bAllowDualSource = false;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+private:
+	/*
+	FUNCTIONS
+	*/
+	// Change the location of the AudioComponent and update che CurrentSourcePosition
 	void MoveVirtualSpeaker(const FVector &PlayerLocation);
 
 	// Check if the player is moving 
@@ -40,27 +61,23 @@ public:
 	// Check if the player is in range
 	bool IsPlayerInRange(const FVector &PlayerLocation) const;
 
+	// Draw Debug
+	void Debug(FVector DebugLocation, FColor Color) const;
+
+	// Get Player Location 
+	FVector GetPlayerLocation() const;
+
 	/*
-		COMPONENTS
+	COMPONENTS
 	*/
 	USplineComponent* SplineComponent;
+
+	// This is the main audio source
 	UAudioComponent* AudioComponent;
 
 	/*
-		VARIABLES
+	VARIABLES
 	*/
-	// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float Range = 1500.0f;
-	// Tick interval
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float UpdateInterval = 0.15f;
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-private:
 	// These variable are used to calculate if the player is moving
 	FVector CurrentPlayerPosition;
 	FVector OldPlayerPosition;

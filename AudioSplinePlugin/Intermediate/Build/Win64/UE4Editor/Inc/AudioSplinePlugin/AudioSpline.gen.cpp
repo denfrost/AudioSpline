@@ -39,6 +39,16 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_UpdateInterval_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_UpdateInterval;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bDebug_MetaData[];
+#endif
+		static void NewProp_bDebug_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bDebug;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bAllowDualSource_MetaData[];
+#endif
+		static void NewProp_bAllowDualSource_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bAllowDualSource;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -62,9 +72,9 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData[] = {
 		{ "Category", "AudioSpline" },
-		{ "Comment", "/*\n\x09\x09VARIABLES\n\x09*/// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range\n" },
+		{ "Comment", "// Distance between main AudioComponent and Player. The sound is Stopped when the player goes beyond the Range\n" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
-		{ "ToolTip", "VARIABLES\n// Distance between AudioComponent and Player. The sound is Stopped when the player goes beyond the Range" },
+		{ "ToolTip", "Distance between main AudioComponent and Player. The sound is Stopped when the player goes beyond the Range" },
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range = { "Range", nullptr, (EPropertyFlags)0x0010000000000015, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, Range), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData)) };
@@ -77,9 +87,37 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval = { "UpdateInterval", nullptr, (EPropertyFlags)0x0010000000000015, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, UpdateInterval), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_MetaData[] = {
+		{ "Category", "AudioSpline" },
+		{ "Comment", "// Debug\n" },
+		{ "ModuleRelativePath", "Public/AudioSpline.h" },
+		{ "ToolTip", "Debug" },
+	};
+#endif
+	void Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_SetBit(void* Obj)
+	{
+		((AAudioSpline*)Obj)->bDebug = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug = { "bDebug", nullptr, (EPropertyFlags)0x0010000000000015, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AAudioSpline), &Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_SetBit, METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource_MetaData[] = {
+		{ "Category", "Dual Source Mode" },
+		{ "Comment", "// The DualSource spawns a new Audio Source if the closest location jumps above a threshold\n" },
+		{ "ModuleRelativePath", "Public/AudioSpline.h" },
+		{ "ToolTip", "The DualSource spawns a new Audio Source if the closest location jumps above a threshold" },
+	};
+#endif
+	void Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource_SetBit(void* Obj)
+	{
+		((AAudioSpline*)Obj)->bAllowDualSource = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource = { "bAllowDualSource", nullptr, (EPropertyFlags)0x0010000000000015, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AAudioSpline), &Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource_SetBit, METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAudioSpline_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AAudioSpline_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AAudioSpline>::IsAbstract,
@@ -108,7 +146,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AAudioSpline, 1561232627);
+	IMPLEMENT_CLASS(AAudioSpline, 794601039);
 	template<> AUDIOSPLINEPLUGIN_API UClass* StaticClass<AAudioSpline>()
 	{
 		return AAudioSpline::StaticClass();
