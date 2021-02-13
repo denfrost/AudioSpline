@@ -1,13 +1,15 @@
-# AudioSpline
+# AAudioSpline
 Audio Spline made in Unreal Engine 4.26. 
 
 ![](Documentation/Images/Image01.PNG)
 
 ### Description
-It moves the location of the audio component to the closest point on the spline to the player location.
+The whole spline can be treated as a sound source. 
+Virtual speaker position is estimated based on the point on the curve that is closest to the listener's position. 
+This type of actor was created mainly to cover long/large areas with a movable sound using only one source. For example you can use it to apply sounds to: river flowing by, wind on the cliff, distant battle soundscape, etc..
 
 ### Supported Engine Versions
-4.26
+4.26 / 4.25
 
 ### Supported Platforms
 Win 32, Win 64, MacOS, Playstation 4 and Xbox one.
@@ -47,6 +49,13 @@ Drag the BP_AudioSpline Actor into the world and add as many spline points as yo
 ![](Documentation/Images/Gif03.gif)
 
 ### How it works
+It's an Actor Class that inherits from AAmbientSound.
+
+#### Components
+- AudioComponent1 
+- SplineComponent
+
+#### Tick 
 ![](Documentation/Images/Image11.PNG)
 
 You can change the Update Interval (Tick Interval) and the Range either on each instance of the actor or on the Blueprint class.
