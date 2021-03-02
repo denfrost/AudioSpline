@@ -33,32 +33,13 @@ You are ready to go!
 #### Using a Blueprint Class
 This will allow you to add your unique blueprint logic to the Audio Spline.
 Right click on the C++ Actor and select "Create Blueprint Class based on Audio Spline". 
-
-![](Documentation/Images/Image04.PNG)
-
 Choose a name and a directory for your Blueprint class.
-![](Documentation/Images/Image07.PNG)
-
 Set your Sound Cue in the Details panel. Then click Compile and Save.
-![](Documentation/Images/Image06.PNG)
-
 Drag the BP_AudioSpline Actor into the world and add as many spline points as you need. To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it.
 ![](Documentation/Images/Gif03.gif)
 
 ### How it works
 It's an Actor Class that inherits from AAmbientSound.
-
-#### Components
-- AudioComponent1 
-- SplineComponent
-
-#### Tick 
-![](Documentation/Images/Image11.PNG)
-
-You can change the Update Interval (Tick Interval) and the Range either on each instance of the actor or on the Blueprint class.
-
-![](Documentation/Images/Image12.png)
-![](Documentation/Images/Image13.png)
 
 ### How to contact me
 For any feedback please send me an email: 
