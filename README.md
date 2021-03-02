@@ -27,10 +27,8 @@ There are two ways of using this tool. You can simply use the C++ Actor or you c
 #### Using the C++ Actor
 Drag the AudioSpline Actor into the world and add as many spline points as you need.
 To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it. 
-![](Documentation/Images/Gif01.gif)
-
 Set your Sound Cue in the Details panel.   
-![](Documentation/Images/Image05.PNG)
+You are ready to go!
 
 #### Using a Blueprint Class
 This will allow you to add your unique blueprint logic to the Audio Spline.
