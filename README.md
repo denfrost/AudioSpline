@@ -8,7 +8,7 @@ The whole spline can be treated as a sound source.
 
 Virtual speaker position is estimated based on the point on the curve that is closest to the listener's position. 
 
-This type of actor was created mainly to cover long/large areas with a movable sound using only one source. For example you can use it to apply sounds to: river flowing by, wind on the cliff, distant battle soundscape, etc..
+This type of actor was created mainly to cover long/large areas with a movable sound. For example you can use it to apply sounds to: river flowing by, wind on the cliff, distant battle soundscape, etc..
 
 ## Supported Engine Versions
 4.26 / 4.25
