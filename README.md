@@ -11,9 +11,6 @@ Virtual speaker position is estimated based on the point on the curve that is cl
 ## Supported Engine Versions
 4.26 / 4.25
 
-## Supported Platforms
-Win 32, Win 64, MacOS, Playstation 4 and Xbox one.
-
 ## How to install the Plugin 
 After you download the repository, extract the zip archive. Your Project can be either a C++ Project or a Blueprint Project. 
 
