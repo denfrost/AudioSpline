@@ -23,8 +23,6 @@ If you don’t have a Plugins folder in your project folder yet, just create one
 
 You will be able to see it in the Editor only if you toggle the "Show Plugin Content" on the "View Options".
 
-![](Documentation/Images/Image09.PNG)
-
 ## How to use the Plugin
 There are two ways of using this tool. You can simply use the C++ Actor or you can create a Blueprint class out of it.
 
@@ -46,8 +44,6 @@ Choose a name and a directory for your Blueprint class.
 Set your Sound Cue in the Details panel. Then click Compile and Save.
 
 Drag the BP_AudioSpline Actor into the world and add as many spline points as you need. To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it.
-
-![](Documentation/Images/Gif03.gif)
 
 ## How it works
 It's an Actor Class that inherits from AAmbientSound.
