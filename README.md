@@ -44,7 +44,7 @@ Drag the BP_AudioSpline Actor into the world and add as many spline points as yo
 
 ### Modifying the parameters
 Once you have created the instance of the object in the world, you will be able to see the exposed variables on the detail panel (you have to scroll down a bit).
-![](Documentation/Images/Image02.PNG)
+![](Documentation/Images/Image02.png)
 
 ## How it works
 It's an Actor Class that inherits from AAmbientSound.
