@@ -54,6 +54,11 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_JumpThreshold;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bAllowJumpScanner_MetaData[];
+#endif
+		static void NewProp_bAllowJumpScanner_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bAllowJumpScanner;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_AdjustedVolume_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_AdjustedVolume;
@@ -61,11 +66,6 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_AdjustedVolumeDuration_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_AdjustedVolumeDuration;
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bAllowJumpScanner_MetaData[];
-#endif
-		static void NewProp_bAllowJumpScanner_SetBit(void* Obj);
-		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bAllowJumpScanner;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -89,9 +89,9 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData[] = {
 		{ "Category", "AudioSpline" },
-		{ "Comment", "// Distance between the AudioComponent and Player. The sound is Stopped when the player goes beyond the Range\n" },
+		{ "Comment", "// The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. \n// Otherwise the sound fades-in.\n" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
-		{ "ToolTip", "Distance between the AudioComponent and Player. The sound is Stopped when the player goes beyond the Range" },
+		{ "ToolTip", "The sound is stopped If the distance between the Player and the Audio Component is greater than the Range.\nOtherwise the sound fades-in." },
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range = { "Range", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, Range), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData)) };
@@ -107,9 +107,9 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_MetaData[] = {
 		{ "Category", "AudioSpline" },
-		{ "Comment", "// Draw debug spheres around the audio sources\n" },
+		{ "Comment", "// Draw a sphere around the active audio sources. \n// There will be an inner sphere to quickly visualise the sound and an outer sphere that represents the Range described above.\n" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
-		{ "ToolTip", "Draw debug spheres around the audio sources" },
+		{ "ToolTip", "Draw a sphere around the active audio sources.\nThere will be an inner sphere to quickly visualise the sound and an outer sphere that represents the Range described above." },
 	};
 #endif
 	void Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_SetBit(void* Obj)
@@ -133,13 +133,27 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_JumpThreshold_MetaData[] = {
 		{ "Category", "Dual Source Mode" },
-		{ "Comment", "// Play the Dual Audio Component If the jump is greater than JumpThreshold\n" },
+		{ "Comment", "// Play the Audio Source If the difference between the old and the current source position is greater than JumpThreshold. \n// Use the Jump Scanner to find a value that suits your needs. If a Jump is detected it will be printed out into the Output Log.\n" },
 		{ "EditCondition", "bAllowDualSource" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
-		{ "ToolTip", "Play the Dual Audio Component If the jump is greater than JumpThreshold" },
+		{ "ToolTip", "Play the Audio Source If the difference between the old and the current source position is greater than JumpThreshold.\nUse the Jump Scanner to find a value that suits your needs. If a Jump is detected it will be printed out into the Output Log." },
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_JumpThreshold = { "JumpThreshold", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, JumpThreshold), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_JumpThreshold_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_JumpThreshold_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_MetaData[] = {
+		{ "Category", "Dual Source Mode" },
+		{ "Comment", "// Print to the Output Log the biggest jump detected during PIE (Play In Editor). \n// This will help you decide which value to put onto the Jump Threshold.\n" },
+		{ "EditCondition", "bAllowDualSource" },
+		{ "ModuleRelativePath", "Public/AudioSpline.h" },
+		{ "ToolTip", "Print to the Output Log the biggest jump detected during PIE (Play In Editor).\nThis will help you decide which value to put onto the Jump Threshold." },
+	};
+#endif
+	void Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_SetBit(void* Obj)
+	{
+		((AAudioSpline*)Obj)->bAllowJumpScanner = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner = { "bAllowJumpScanner", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AAudioSpline), &Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_SetBit, METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolume_MetaData[] = {
 		{ "Category", "Dual Source Mode" },
@@ -160,29 +174,15 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolumeDuration = { "AdjustedVolumeDuration", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, AdjustedVolumeDuration), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolumeDuration_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolumeDuration_MetaData)) };
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_MetaData[] = {
-		{ "Category", "Dual Source Mode" },
-		{ "Comment", "// Print to the Output Log the biggest jump detected during PIE (Play In Editor)\n" },
-		{ "EditCondition", "bAllowDualSource" },
-		{ "ModuleRelativePath", "Public/AudioSpline.h" },
-		{ "ToolTip", "Print to the Output Log the biggest jump detected during PIE (Play In Editor)" },
-	};
-#endif
-	void Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_SetBit(void* Obj)
-	{
-		((AAudioSpline*)Obj)->bAllowJumpScanner = 1;
-	}
-	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner = { "bAllowJumpScanner", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AAudioSpline), &Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_SetBit, METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAudioSpline_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_JumpThreshold,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolume,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolumeDuration,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowJumpScanner,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AAudioSpline_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AAudioSpline>::IsAbstract,
@@ -211,7 +211,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AAudioSpline, 1888597259);
+	IMPLEMENT_CLASS(AAudioSpline, 1201215601);
 	template<> AUDIOSPLINEPLUGIN_API UClass* StaticClass<AAudioSpline>()
 	{
 		return AAudioSpline::StaticClass();

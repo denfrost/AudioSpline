@@ -31,7 +31,8 @@ public:
 	// Function called every frame on this Actor
 	virtual void Tick(float DeltaTime) override;
 
-	// Distance between the AudioComponent and Player. The sound is Stopped when the player goes beyond the Range
+	// The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. 
+	// Otherwise the sound fades-in.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Range{ 15000.0f };
 
@@ -39,7 +40,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float UpdateInterval{ 0.15f };
 
-	// Draw debug spheres around the audio sources
+	// Draw a sphere around the active audio sources. 
+	// There will be an inner sphere to quickly visualise the sound and an outer sphere that represents the Range described above.
 	UPROPERTY(EditAnywhere)
 	bool bDebug{ false };
 
@@ -48,9 +50,15 @@ public:
 	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadOnly)
 	bool bAllowDualSource{ false };
 
-	// Play the Dual Audio Component If the jump is greater than JumpThreshold
+	// Play the Audio Source If the difference between the old and the current source position is greater than JumpThreshold. 
+	// Use the Jump Scanner to find a value that suits your needs. If a Jump is detected it will be printed out into the Output Log.
 	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"))
 	float JumpThreshold{ 1000.0f };
+
+	// Print to the Output Log the biggest jump detected during PIE (Play In Editor). 
+	// This will help you decide which value to put onto the Jump Threshold.
+	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, meta = (EditCondition = "bAllowDualSource"))
+	bool bAllowJumpScanner{ false };
 
 	// Volume of BOTH Audio Components when the Dual Source is spawned  
 	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"))
@@ -60,9 +68,6 @@ public:
 	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"))
 	float AdjustedVolumeDuration{ 0.5f };
 
-	// Print to the Output Log the biggest jump detected during PIE (Play In Editor)
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, meta = (EditCondition = "bAllowDualSource"))
-	bool bAllowJumpScanner{ false };
 
 
 protected:
