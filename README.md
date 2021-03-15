@@ -84,9 +84,6 @@ Volume of BOTH Audio Components when the Dual Source is spawned.
 How quick the Main Audio Component is going to fade/adjust its volume when Dual Audio Component spawns OR get killed.
 
 
-## How it works
-It's an Actor Class that inherits from AAmbientSound.
-
 ## How to contact me
 For any feedback please send me an email: 
 luigiplatania94@gmail.com
