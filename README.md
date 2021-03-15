@@ -48,7 +48,16 @@ Once you have created the instance of the object in the world, you will be able 
 ![](Documentation/Images/Image02.png)
 
 Range: 
-This variable is
+The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. Otherwise the sound fades-in.
+
+Update Interval:
+User-defined tick interval. It is a way to optimise the performance of the tool.
+
+Debug:
+Draw a sphere around the active audio sources. There will be an inner sphere to quickly visualise the sound and an outer sphere that represents the Range described above.
+
+Allow Dual Source:
+
 
 ## How it works
 It's an Actor Class that inherits from AAmbientSound.
