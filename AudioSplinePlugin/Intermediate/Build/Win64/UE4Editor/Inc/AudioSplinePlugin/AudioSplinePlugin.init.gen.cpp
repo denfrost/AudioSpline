@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSplinePlugin_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x4CF8F50F,
+				0x4D65C1B6,
 				0x078D0C41,
 				METADATA_PARAMS(nullptr, 0)
 			};

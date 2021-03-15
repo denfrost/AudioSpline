@@ -1,6 +1,9 @@
 /*=============================================================================
 	AudioSpline.cpp
 
+	Doc:
+	https://github.com/luigiplatania94/AudioSpline
+
 	Luigi Platania
 	https://www.luigiplatania.net/
 
@@ -27,9 +30,13 @@ AAudioSpline::AAudioSpline(const FObjectInitializer& ObjectInitializer)
 	RootComponent = SplineComponent;
 	SplineComponent->SetGenerateOverlapEvents(false);
 
-	// Initialise the Audio Component and attach it to the Root
-	AudioComponent = GetAudioComponent();
-	AudioComponent->SetupAttachment(RootComponent);
+	// Initialise the Main Audio Component and attach it to the Root
+	MainAudioComponent = GetAudioComponent();
+	MainAudioComponent->SetupAttachment(RootComponent);
+
+	// Initialise the Dual Audio Component and attach it to the root
+	DualAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("Dual Audio Component"));
+	DualAudioComponent->SetupAttachment(RootComponent);
 
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
@@ -43,13 +50,14 @@ void AAudioSpline::BeginPlay()
 	// Set the Tick Interval equal to the user-defined Update Interval
 	PrimaryActorTick.TickInterval = UpdateInterval;
 
+	// Set the SoundBase of the Dual Audio Component to be equal to the Main Audio Component's one
+	DualAudioComponent->SetSound(MainAudioComponent->Sound);
+
 	// Print an Error if the Audio Spline Actor does not have a Sound Cue
-#if WITH_EDITOR
-	if (bDebug && !AudioComponent->Sound)
+	if (!MainAudioComponent->Sound)
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s does not have a Sound Cue"), *GetName());
 	}
-#endif // #if WITH_EDITOR
 }
 
 // Function called every frame on this Actor
@@ -60,57 +68,123 @@ void AAudioSpline::Tick(float DeltaTime)
 	// Store the player location at the given time
 	FVector PlayerLocation = GetPlayerLocation();
 
-	// Update the main Audio Component Location if the Player is moving
+	// Update the Audio Component(s) location(s) if the Player is moving
 	if (IsPlayerMoving(PlayerLocation))
 	{
 		// Move the main Audio Component to the point on the curve that is closest to the listener's position
 		MoveVirtualSpeaker(PlayerLocation);
-	}
+
+		// Check if the user has enabled the JumpScanner on the instance of the Actor
+		if (bAllowJumpScanner)
+		{
+			// Print to the Output Log the biggest jump detected during PIE (Play In Editor)
+			JumpScanner();
+		}
+
+		// If a Jump was detected, play the Dual Audio Component
+		if (bAllowDualSource && IsJumpDetected())
+		{
+			// Update Dual Audio Component position 
+			DualAudioComponent->SetWorldLocation(TempOldSourcePosition);
+			
+			// Fade in Dual Audio Component and adjust the Main Audio Component's volume
+			if (!DualAudioComponent->IsPlaying())
+			{
+				DualAudioComponent->FadeIn(0.05, AdjustedVolume, 0.0f, EAudioFaderCurve::Sin);
+				MainAudioComponent->FadeIn(AdjustedVolumeDuration, AdjustedVolume, 0.0f, EAudioFaderCurve::Sin);
+			}
+
+			bDualDebug = true;
+		}
+
+		// DEBUG visualisation WHITE. The Player is moving.
+		if (bDebug && MainAudioComponent->Sound)
+		{
+			// Debug the main Audio Component
+			Debug(MainAudioComponent->GetComponentLocation(), FColor::White);
+			
+			// Debug the Dual Audio Component
+			if (bDualDebug)
+			{
+				Debug(DualAudioComponent->GetComponentLocation(), FColor::White);
+			}
+		}
+	} // End if (IsPlayerMoving(PlayerLocation))
 	else
 	{
-		// Debug visualisation BLACK/RED. The Player is NOT moving
-		if (bDebug)
+		// DEBUG visualisation BLACK. The Player is NOT moving
+		if (bDebug && MainAudioComponent->Sound)
 		{
 			// Debug the main Audio Componet
-			Debug(AudioComponent->GetComponentLocation(), FColor::Black);
+			Debug(MainAudioComponent->GetComponentLocation(), FColor::Black);
+
+			// Debug the Dual Audio Component
+			if (bDualDebug)
+			{
+				Debug(DualAudioComponent->GetComponentLocation(), FColor::Black);
+			}
 		}
 	}
 
-	// Play audio component if the player is in range, else Stop it.
-	if (IsPlayerInRange(PlayerLocation))
+	/*
+	*	Logic for playing and stopping the Main Audio Component
+	*/
+
+	// Play Main audio component if the player is in range, else Stop it.
+	if (IsPlayerInRange(PlayerLocation, MainAudioComponent))
 	{
-		if (!AudioComponent->IsPlaying())
+		if (!MainAudioComponent->IsPlaying())
 		{
 			// FadeIn the sound if the player is in range
-			AudioComponent->FadeIn(0.5f, 1.0f, 0.0f, EAudioFaderCurve::Logarithmic);
+			MainAudioComponent->FadeIn(0.1, 1.0f, 0.0f, EAudioFaderCurve::Logarithmic);
 		}
 	}
-	else if (AudioComponent->IsPlaying())
+	else if (MainAudioComponent->IsPlaying())
 	{
 			// FadeOut and Stop the sound if the player is NOT in range
-			AudioComponent->FadeOut(0.5f, 0.0f, EAudioFaderCurve::Logarithmic);
+			MainAudioComponent->FadeOut(0.1, 0.0f, EAudioFaderCurve::Logarithmic);
+	}
+
+
+	/*
+	 *	Logic for stopping the Dual Audio Component and 
+	*/
+	if (bAllowDualSource && !IsPlayerInRange(PlayerLocation, DualAudioComponent))
+	{
+		// Fade out If the player is NOT in range
+		if (DualAudioComponent->IsPlaying())
+		{
+			DualAudioComponent->FadeOut(0.1, 0.0f, EAudioFaderCurve::Logarithmic);
+
+			// Main Audio component's volume goes back to normal
+			MainAudioComponent->AdjustVolume(AdjustedVolumeDuration, 1.0f, EAudioFaderCurve::Logarithmic);
+		}
+
+		bDualDebug = false;
 	}
 }
 
-// Change the location of the AudioComponent along the SplineComponent and update che CurrentSourcePosition
+// Change the location of the AudioComponent along the SplineComponent 
 void AAudioSpline::MoveVirtualSpeaker(const FVector &PlayerLocation)
 {
 	// Return the closest point on the spline to the PlayerLocation
-	FVector ClosestPoint = SplineComponent->FindLocationClosestToWorldLocation(PlayerLocation, ESplineCoordinateSpace::World);
-	AudioComponent->SetWorldLocation(ClosestPoint);
+	CurrentSourcePosition = SplineComponent->FindLocationClosestToWorldLocation(PlayerLocation, ESplineCoordinateSpace::World);
+	// Update the main Audio Component location with the closest point previously calculated
+	MainAudioComponent->SetWorldLocation(CurrentSourcePosition);
 
-	// Debug visualisation WHITE/YELLO. The Player is moving.
-	if (bDebug)
+	// Dual Source Logic - This will prevent to detect a jump once the the actor is spawned
+	if (bDoOnce)
 	{
-		// Debug the main Audio Componet
-		Debug(AudioComponent->GetComponentLocation(), FColor::White);
-	}
+		OldSourcePosition = CurrentSourcePosition;
+		bDoOnce = false;
+	} 
 }
 
 // Return true if the player is moving. 
 bool AAudioSpline::IsPlayerMoving(const FVector &PlayerLocation)  
 {
 	CurrentPlayerPosition = PlayerLocation;
+	// If the old and the current player position did not change, it means the player is not moving
 	if (CurrentPlayerPosition == OldPlayerPosition)
 	{
 		OldPlayerPosition = CurrentPlayerPosition;
@@ -123,24 +197,76 @@ bool AAudioSpline::IsPlayerMoving(const FVector &PlayerLocation)
 	}
 }
 
-// Return true if the player is in range
-bool AAudioSpline::IsPlayerInRange(const FVector &PlayerLocation) const
+// Return true if the player is in range relative to the target Audio Component
+bool AAudioSpline::IsPlayerInRange(const FVector &PlayerLocation, const UAudioComponent* TargetAudioComponent) const
 {
-	FVector AudioComponentLocation = AudioComponent->GetComponentLocation();
-	float DistanceToPlayer = FVector::Dist(PlayerLocation, AudioComponentLocation);
+	// Get the target Audio Component Location
+	FVector TargetAudioComponentLocation = TargetAudioComponent->GetComponentLocation();
+	// Store into a temporary variable the distance between the PlayerLocation and the Main Audio Component Location
+	float DistanceToPlayer = FVector::Dist(PlayerLocation, TargetAudioComponentLocation);
+	// Return true if thee distance is less than the user-defined Range 
+	return DistanceToPlayer < Range;
+}
 
-	if (DistanceToPlayer < Range)
+// Get Player Location 
+FVector AAudioSpline::GetPlayerLocation() const
+{
+	APawn* LocalPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+
+	// Return an FVector initialised to zero if the pointer is not aiming towards the PlayerPawn
+	if (!LocalPawn)
 	{
-		return true;
+		return FVector(EForceInit::ForceInitToZero);
 	}
+
+	return LocalPawn->GetActorLocation();
+}
+
+// Dual Source Function - Return true if a Jump is detected
+bool AAudioSpline::IsJumpDetected()
+{
+	// Store the OldSourcePosition in a temporary variable. It will be used to update the Dual Audio Component Position.
+	TempOldSourcePosition = OldSourcePosition;
+
+	// Jump is detected when the distance between the CurrentSourcePosition and the OldSourcePosition is greater than the JumpThreshold (User-Defined)
+	if (FVector::Dist(CurrentSourcePosition, OldSourcePosition) > JumpThreshold)
+	{
+		OldSourcePosition = CurrentSourcePosition;
+		// Print to the output log if a Jump was detected
+		if (bDebug)
+		{
+#if WITH_EDITOR
+			// Print to the output log if a Jump was detected
+			UE_LOG(LogTemp, Warning, TEXT("%s A Jump has been detected."), *GetName());
+#endif // #if WITH_EDITOR
+		}
+		return true;
+	} // End  if (FVector::Dist(CurrentSourcePosition, OldSourcePosition) > JumpThreshold)
 	else
 	{
+		OldSourcePosition = CurrentSourcePosition;
 		return false;
 	}
 }
 
-// Draw Debug
-void AAudioSpline::Debug(FVector DebugLocation, FColor Color) const
+// Dual Source Function - Print to the Output Log the biggest jump detected during PIE (Play In Editor) 
+void AAudioSpline::JumpScanner()
+{
+#if WITH_EDITOR
+	// Temporary distance between old and current source position
+	float TempJump = FVector::Dist(CurrentSourcePosition, OldSourcePosition);
+	// Update LargestJumpSoFar If the distance previously calculated is greater than its current value 
+	if (TempJump > LargestJumpSoFar)
+	{
+		LargestJumpSoFar = TempJump;
+	}
+	// Print to the output log the biggest jump so far
+	UE_LOG(LogTemp, Warning, TEXT("%s The biggest jump so far is: %f"), *GetName(), LargestJumpSoFar);
+#endif // #if WITH_EDITOR
+}
+
+// Draw Debug sphere based on the Audio Component Location. WHITE means the player IS moving. Black means the player is NOT moving
+void AAudioSpline::Debug(const FVector DebugLocation, FColor Color) const
 {
 #if WITH_EDITOR
 	// The life-time of the sphere is set to be UpdateInterval + 0.01 in order to avoid a flashing effect
@@ -149,13 +275,3 @@ void AAudioSpline::Debug(FVector DebugLocation, FColor Color) const
 #endif // #if WITH_EDITOR
 }
 
-// Get Player Location 
-FVector AAudioSpline::GetPlayerLocation() const
-{
-	APawn* LocalPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	if (!LocalPawn)
-	{
-		return FVector();
-	}
-	return LocalPawn->GetActorLocation();
-}
