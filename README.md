@@ -4,17 +4,12 @@ Audio Spline made in Unreal Engine 4.26.
 ![](Documentation/Images/Image01.PNG)
 
 ## Description
-The whole spline can be treated as a sound source. 
+This type of actor was created mainly to cover long/large areas with a movable sound. For example you can use it to apply sounds to: river flowing by, wind on the cliff, distant battle soundscape, etc..
 
-Virtual speaker position is estimated based on the point on the curve that is closest to the listener's position. 
-
-This type of actor was created mainly to cover long/large areas with a movable sound using only one source. For example you can use it to apply sounds to: river flowing by, wind on the cliff, distant battle soundscape, etc..
+Virtual speaker position is estimated based on the point on the curve that is closest to the listener's position.
 
 ## Supported Engine Versions
 4.26 / 4.25
-
-## Supported Platforms
-Win 32, Win 64, MacOS, Playstation 4 and Xbox one.
 
 ## How to install the Plugin 
 After you download the repository, extract the zip archive. Your Project can be either a C++ Project or a Blueprint Project. 
@@ -24,8 +19,6 @@ Copy the folders "AudioSplinePlugin" into the "Plugins" folder of your UE4 proje
 If you don’t have a Plugins folder in your project folder yet, just create one.
 
 You will be able to see it in the Editor only if you toggle the "Show Plugin Content" on the "View Options".
-
-![](Documentation/Images/Image09.PNG)
 
 ## How to use the Plugin
 There are two ways of using this tool. You can simply use the C++ Actor or you can create a Blueprint class out of it.
@@ -48,8 +41,6 @@ Choose a name and a directory for your Blueprint class.
 Set your Sound Cue in the Details panel. Then click Compile and Save.
 
 Drag the BP_AudioSpline Actor into the world and add as many spline points as you need. To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it.
-
-![](Documentation/Images/Gif03.gif)
 
 ## How it works
 It's an Actor Class that inherits from AAmbientSound.
