@@ -67,6 +67,22 @@ The DualSource spawns a new Audio Source if the closest location on the spline j
 
 Do not update this bool during PIE(Play In Editor)
 
+#### Jump Threshold
+
+Play the Audio Source If the difference between the old and the current source position is greater than JumpThreshold. Use the Jump Scanner to find a value that suits your needs. If a Jump is detected it will be printed out into the Output Log.
+
+#### Jump Scanner
+
+Print to the Output Log the biggest jump detected during PIE (Play In Editor). This will help you decide which value to put onto the Jump Threshold. 
+
+#### Adjusted Volume
+
+Volume of BOTH Audio Components when the Dual Source is spawned. 
+
+#### Adjusted Volume Duration
+
+How quick the Main Audio Component is going to fade/adjust its volume when Dual Audio Component spawns OR get killed.
+
 
 ## How it works
 It's an Actor Class that inherits from AAmbientSound.
