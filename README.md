@@ -61,6 +61,12 @@ Draw a sphere around the active audio sources. There will be an inner sphere to 
 
 #### Allow Dual Source:
 
+If true, it enables the Dual Source Mode. 
+
+The DualSource spawns a new Audio Source if the closest location on the spline jumps above a threshold.
+
+Do not update this bool during PIE(Play In Editor)
+
 
 ## How it works
 It's an Actor Class that inherits from AAmbientSound.
