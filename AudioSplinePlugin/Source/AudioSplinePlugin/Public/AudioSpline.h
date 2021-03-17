@@ -37,7 +37,7 @@ public:
 	float Range{ 15000.0f };
 
 	// User-defined Tick interval
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float UpdateInterval{ 0.15f };
 
 	// Draw a sphere around the active audio sources. 

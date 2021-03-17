@@ -11,6 +11,7 @@
 	luigiplatania94@gmail.com
 =============================================================================*/
 
+#include "AudioSpline.h"
 #include "Components/ActorComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/SplineComponent.h"
@@ -19,7 +20,6 @@
 #include "GameFramework/Actor.h"
 #include "Math/Vector.h"
 #include "Kismet/GameplayStatics.h"
-#include "AudioSpline.h"
 
 // Constructor
 AAudioSpline::AAudioSpline(const FObjectInitializer& ObjectInitializer)
