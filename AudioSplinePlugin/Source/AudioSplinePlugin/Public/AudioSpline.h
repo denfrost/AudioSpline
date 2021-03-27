@@ -33,11 +33,11 @@ public:
 
 	// The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. 
 	// Otherwise the sound fades-in.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.1"))
 	float Range{ 15000.0f };
 
 	// User-defined Tick interval
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (ClampMin = "0.008", ClamMax = ""))
 	float UpdateInterval{ 0.15f };
 
 	// Draw a sphere around the active audio sources. 
@@ -52,7 +52,7 @@ public:
 
 	// Play the Audio Source If the difference between the old and the current source position is greater than JumpThreshold. 
 	// Use the Jump Scanner to find a value that suits your needs. If a Jump is detected it will be printed out into the Output Log.
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"))
+	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"))
 	float JumpThreshold{ 1000.0f };
 
 	// Print to the Output Log the biggest jump detected during PIE (Play In Editor). 
@@ -61,11 +61,11 @@ public:
 	bool bAllowJumpScanner{ false };
 
 	// Volume of BOTH Audio Components when the Dual Source is spawned  
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"))
+	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"))
 	float AdjustedVolume{ 0.75f };
 
 	// How quick the Main Audio Component is going to fade/adjust its volume when Dual Audio Component spawns OR get killed
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"))
+	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"))
 	float AdjustedVolumeDuration{ 0.5f };
 
 

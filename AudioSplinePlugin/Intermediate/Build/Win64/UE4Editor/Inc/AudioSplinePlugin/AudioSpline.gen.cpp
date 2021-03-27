@@ -89,6 +89,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range_MetaData[] = {
 		{ "Category", "AudioSpline" },
+		{ "ClampMin", "0.1" },
 		{ "Comment", "// The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. \n// Otherwise the sound fades-in.\n" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
 		{ "ToolTip", "The sound is stopped If the distance between the Player and the Audio Component is greater than the Range.\nOtherwise the sound fades-in." },
@@ -98,6 +99,8 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval_MetaData[] = {
 		{ "Category", "AudioSpline" },
+		{ "ClamMax", "" },
+		{ "ClampMin", "0.008" },
 		{ "Comment", "// User-defined Tick interval\n" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
 		{ "ToolTip", "User-defined Tick interval" },
@@ -133,6 +136,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_JumpThreshold_MetaData[] = {
 		{ "Category", "Dual Source Mode" },
+		{ "ClampMin", "0.0" },
 		{ "Comment", "// Play the Audio Source If the difference between the old and the current source position is greater than JumpThreshold. \n// Use the Jump Scanner to find a value that suits your needs. If a Jump is detected it will be printed out into the Output Log.\n" },
 		{ "EditCondition", "bAllowDualSource" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
@@ -157,6 +161,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolume_MetaData[] = {
 		{ "Category", "Dual Source Mode" },
+		{ "ClampMin", "0.0" },
 		{ "Comment", "// Volume of BOTH Audio Components when the Dual Source is spawned  \n" },
 		{ "EditCondition", "bAllowDualSource" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
@@ -167,6 +172,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_AdjustedVolumeDuration_MetaData[] = {
 		{ "Category", "Dual Source Mode" },
+		{ "ClampMin", "0.0" },
 		{ "Comment", "// How quick the Main Audio Component is going to fade/adjust its volume when Dual Audio Component spawns OR get killed\n" },
 		{ "EditCondition", "bAllowDualSource" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
@@ -211,7 +217,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AAudioSpline, 2013164703);
+	IMPLEMENT_CLASS(AAudioSpline, 2104058241);
 	template<> AUDIOSPLINEPLUGIN_API UClass* StaticClass<AAudioSpline>()
 	{
 		return AAudioSpline::StaticClass();
