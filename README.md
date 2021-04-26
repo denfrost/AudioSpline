@@ -9,7 +9,7 @@ This type of actor was created mainly to cover long/large areas with a movable s
 Virtual speaker position is estimated based on the point on the curve that is closest to the listener's position.
 
 ## Supported Engine Versions
-4.26 / 4.25
+4.26 
 
 ## How to install the Plugin 
 After you download the repository, extract the zip archive. Your Project can be either a C++ Project or a Blueprint Project. 
@@ -45,15 +45,22 @@ Drag the BP_AudioSpline Actor into the world and add as many spline points as yo
 ### Modifying the parameters
 Once you have created the instance of the object in the world, you will be able to see the exposed variables on the "Details" panel (you have to scroll down a bit).
 
-![](Documentation/Images/Image02.png)
+![](Documentation/Images/DetailPanel.png)
 
 #### Range: 
 
 The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. Otherwise the sound fades-in.
+Furthermore, the range is used to slow down the tick in order to optimise the performance.
 
 #### Update Interval:
 
-User-defined tick interval. It is a way to optimise the performance of the tool.
+User-defined tick interval.
+
+#### Slow Interval:
+
+Tick interval when the player is not in range. This value should be greater than UpdateInterval.
+
+If you don't want to optimise the tick, set the Slow Interval to be equal to the Update Interval.
 
 #### Debug:
 
@@ -73,7 +80,7 @@ Play the Audio Source If the difference between the old and the current source p
 
 #### Jump Scanner
 
-Print to the Output Log the biggest jump detected during PIE (Play In Editor). This will help you decide which value to put onto the Jump Threshold. 
+Debug utility. Print to the Output Log the biggest jump detected during PIE (Play In Editor). It will help you decide which value to put onto the Jump Threshold. 
 
 #### Adjusted Volume
 
