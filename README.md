@@ -78,7 +78,7 @@ Play the Audio Source If the difference between the old and the current source p
 
 #### Jump Scanner
 
-Print to the Output Log the biggest jump detected during PIE (Play In Editor). This will help you decide which value to put onto the Jump Threshold. 
+Debug utility. Print to the Output Log the biggest jump detected during PIE (Play In Editor). It will help you decide which value to put onto the Jump Threshold. 
 
 #### Adjusted Volume
 
