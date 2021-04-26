@@ -40,6 +40,10 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_UpdateInterval;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_SlowInterval_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_SlowInterval;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bDebug_MetaData[];
 #endif
 		static void NewProp_bDebug_SetBit(void* Obj);
@@ -99,14 +103,21 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval_MetaData[] = {
 		{ "Category", "AudioSpline" },
-		{ "ClamMax", "" },
-		{ "ClampMin", "0.008" },
 		{ "Comment", "// User-defined Tick interval\n" },
 		{ "ModuleRelativePath", "Public/AudioSpline.h" },
 		{ "ToolTip", "User-defined Tick interval" },
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval = { "UpdateInterval", nullptr, (EPropertyFlags)0x0010000000000015, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, UpdateInterval), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_SlowInterval_MetaData[] = {
+		{ "Category", "AudioSpline" },
+		{ "Comment", "// Tick interval when the player is not in range. This value should be greater than UpdateInterval\n" },
+		{ "ModuleRelativePath", "Public/AudioSpline.h" },
+		{ "ToolTip", "Tick interval when the player is not in range. This value should be greater than UpdateInterval" },
+	};
+#endif
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAudioSpline_Statics::NewProp_SlowInterval = { "SlowInterval", nullptr, (EPropertyFlags)0x0010000000000015, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAudioSpline, SlowInterval), METADATA_PARAMS(Z_Construct_UClass_AAudioSpline_Statics::NewProp_SlowInterval_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAudioSpline_Statics::NewProp_SlowInterval_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug_MetaData[] = {
 		{ "Category", "AudioSpline" },
@@ -183,6 +194,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAudioSpline_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_Range,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_UpdateInterval,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_SlowInterval,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bDebug,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_bAllowDualSource,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAudioSpline_Statics::NewProp_JumpThreshold,
@@ -217,7 +229,7 @@ void EmptyLinkFunctionForGeneratedCodeAudioSpline() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AAudioSpline, 2104058241);
+	IMPLEMENT_CLASS(AAudioSpline, 1423646832);
 	template<> AUDIOSPLINEPLUGIN_API UClass* StaticClass<AAudioSpline>()
 	{
 		return AAudioSpline::StaticClass();

@@ -127,22 +127,29 @@ void AAudioSpline::Tick(float DeltaTime)
 	}
 
 	/*
-	*	Logic for playing and stopping the Main Audio Component
+	*	Logic for playing and stopping the Main Audio Component and slowing down the tick 
 	*/
 
 	// Play Main audio component if the player is in range, else Stop it.
+	// Furthermore, if the player is not in range, slow down the tick.
 	if (IsPlayerInRange(PlayerLocation, MainAudioComponent))
 	{
 		if (!MainAudioComponent->IsPlaying())
 		{
 			// FadeIn the sound if the player is in range
 			MainAudioComponent->FadeIn(0.1, 1.0f, 0.0f, EAudioFaderCurve::Logarithmic);
+
+			// slow down the tick interval to optimise performance
+			PrimaryActorTick.TickInterval = UpdateInterval;
 		}
 	}
 	else if (MainAudioComponent->IsPlaying())
 	{
 			// FadeOut and Stop the sound if the player is NOT in range
 			MainAudioComponent->FadeOut(0.1, 0.0f, EAudioFaderCurve::Logarithmic);
+
+			// slow down the tick interval to optimise performance
+			PrimaryActorTick.TickInterval = SlowInterval;
 	}
 
 
@@ -269,9 +276,9 @@ void AAudioSpline::JumpScanner()
 void AAudioSpline::Debug(const FVector DebugLocation, FColor Color) const
 {
 #if WITH_EDITOR
-	// The life-time of the sphere is set to be UpdateInterval + 0.01 in order to avoid a flashing effect
-	DrawDebugSphere(GetWorld(), DebugLocation, 100.0f, 16, Color, false, UpdateInterval + 0.01);
-	DrawDebugSphere(GetWorld(), DebugLocation, Range, 32, Color, false, UpdateInterval + 0.01);
+	// The life-time of the sphere is set to be tick + 0.01 in order to avoid a flashing effect
+	DrawDebugSphere(GetWorld(), DebugLocation, 100.0f, 16, Color, false, PrimaryActorTick.TickInterval + 0.01);
+	DrawDebugSphere(GetWorld(), DebugLocation, Range, 32, Color, false, PrimaryActorTick.TickInterval + 0.01);
 #endif // #if WITH_EDITOR
 }
 

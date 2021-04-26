@@ -37,8 +37,12 @@ public:
 	float Range{ 15000.0f };
 
 	// User-defined Tick interval
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (ClampMin = "0.008", ClamMax = ""))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float UpdateInterval{ 0.15f };
+
+	// Tick interval when the player is not in range. This value should be greater than UpdateInterval
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float SlowInterval{ 0.5f };
 
 	// Draw a sphere around the active audio sources. 
 	// There will be an inner sphere to quickly visualise the sound and an outer sphere that represents the Range described above.
