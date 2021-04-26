@@ -9,7 +9,7 @@ This type of actor was created mainly to cover long/large areas with a movable s
 Virtual speaker position is estimated based on the point on the curve that is closest to the listener's position.
 
 ## Supported Engine Versions
-4.26 / 4.25
+4.26 
 
 ## How to install the Plugin 
 After you download the repository, extract the zip archive. Your Project can be either a C++ Project or a Blueprint Project. 
