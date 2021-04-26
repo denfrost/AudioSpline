@@ -60,6 +60,8 @@ User-defined tick interval.
 
 Tick interval when the player is not in range. This value should be greater than UpdateInterval.
 
+If you don't want to optimise the tick, set the Slow Interval to be equal to the Update Interval.
+
 #### Debug:
 
 Draw a sphere around the active audio sources. There will be an inner sphere to quickly visualise the sound and an outer sphere that represents the Range described above.
