@@ -50,10 +50,15 @@ Once you have created the instance of the object in the world, you will be able 
 #### Range: 
 
 The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. Otherwise the sound fades-in.
+Furthermore, the range is used to slow down the tick in order to optimise the performance.
 
 #### Update Interval:
 
-User-defined tick interval. It is a way to optimise the performance of the tool.
+User-defined tick interval.
+
+#### Slow Interval:
+
+Tick interval when the player is not in range. This value should be greater than UpdateInterval.
 
 #### Debug:
 
