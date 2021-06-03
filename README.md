@@ -3,6 +3,9 @@ Audio Spline made in Unreal Engine 4.26.
 
 ![](Documentation/Images/Image01.PNG)
 
+## Video
+https://vimeo.com/552424556
+
 ## Description
 This type of actor was created mainly to cover long/large areas with a movable sound. For example you can use it to apply sounds to: river flowing by, wind on the cliff, distant battle soundscape, etc..
 
