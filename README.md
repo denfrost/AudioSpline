@@ -62,7 +62,6 @@ User-defined tick interval.
 #### Slow Interval:
 
 Tick interval when the player is not in range. This value should be greater than UpdateInterval.
-
 If you don't want to optimise the tick, set the Slow Interval to be equal to the Update Interval.
 
 #### Debug:
@@ -72,9 +71,7 @@ Draw a sphere around the active audio sources. There will be an inner sphere to 
 #### Allow Dual Source:
 
 If true, it enables the Dual Source Mode. 
-
 The DualSource spawns a new Audio Source if the closest location on the spline jumps above a threshold.
-
 Do not update this bool during PIE(Play In Editor)
 
 #### Jump Threshold
