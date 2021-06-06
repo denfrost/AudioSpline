@@ -3,6 +3,9 @@ Audio Spline made in Unreal Engine 4.26.
 
 ![](Documentation/Images/Image01.PNG)
 
+## Video
+https://vimeo.com/552424556
+
 ## Description
 This type of actor was created mainly to cover long/large areas with a movable sound. For example you can use it to apply sounds to: river flowing by, wind on the cliff, distant battle soundscape, etc..
 
@@ -43,7 +46,7 @@ Set your Sound Cue in the Details panel. Then click Compile and Save.
 Drag the BP_AudioSpline Actor into the world and add as many spline points as you need. To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it.
 
 ### Modifying the parameters
-Once you have created the instance of the object in the world, you will be able to see the exposed variables on the "Details" panel (you have to scroll down a bit).
+Once you have created the instance of the class in the world, you will be able to see the exposed variables on the "Details" panel once you click on it (you have to scroll down a bit).
 
 ![](Documentation/Images/DetailPanel.png)
 
@@ -59,7 +62,6 @@ User-defined tick interval.
 #### Slow Interval:
 
 Tick interval when the player is not in range. This value should be greater than UpdateInterval.
-
 If you don't want to optimise the tick, set the Slow Interval to be equal to the Update Interval.
 
 #### Debug:
@@ -69,10 +71,8 @@ Draw a sphere around the active audio sources. There will be an inner sphere to 
 #### Allow Dual Source:
 
 If true, it enables the Dual Source Mode. 
-
 The DualSource spawns a new Audio Source if the closest location on the spline jumps above a threshold.
-
-Do not update this bool during PIE(Play In Editor)
+Do not update this bool during PIE (Play In Editor)
 
 #### Jump Threshold
 
