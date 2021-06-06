@@ -46,7 +46,7 @@ Set your Sound Cue in the Details panel. Then click Compile and Save.
 Drag the BP_AudioSpline Actor into the world and add as many spline points as you need. To add a spline point drag one of the X,Y,Z arrows while holding alt key on your keyboard. Alternatevely you can add a spline point anywhere on the spline by right click on it.
 
 ### Modifying the parameters
-Once you have created the instance of the object in the world, you will be able to see the exposed variables on the "Details" panel (you have to scroll down a bit).
+Once you have created the instance of the class in the world, you will be able to see the exposed variables on the "Details" panel once you click on it (you have to scroll down a bit).
 
 ![](Documentation/Images/DetailPanel.png)
 
