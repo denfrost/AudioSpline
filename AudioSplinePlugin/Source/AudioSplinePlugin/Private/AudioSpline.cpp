@@ -74,12 +74,14 @@ void AAudioSpline::Tick(float DeltaTime)
 		// Move the main Audio Component to the point on the curve that is closest to the listener's position
 		MoveVirtualSpeaker(PlayerLocation);
 
+#if WITH_EDITOR
 		// Check if the user has enabled the JumpScanner on the instance of the Actor
 		if (bAllowJumpScanner)
 		{
 			// Print to the Output Log the biggest jump detected during PIE (Play In Editor)
 			JumpScanner();
 		}
+#endif // #if WITH_EDITOR
 
 		// If a Jump was detected, play the Dual Audio Component
 		if (bAllowDualSource && IsJumpDetected())
@@ -97,6 +99,7 @@ void AAudioSpline::Tick(float DeltaTime)
 			bDualDebug = true;
 		}
 
+#if WITH_EDITOR
 		// DEBUG visualisation WHITE. The Player is moving.
 		if (bDebug && MainAudioComponent->Sound)
 		{
@@ -109,7 +112,11 @@ void AAudioSpline::Tick(float DeltaTime)
 				Debug(DualAudioComponent->GetComponentLocation(), FColor::White);
 			}
 		}
+#endif // #if WITH_EDITOR
+
 	} // End if (IsPlayerMoving(PlayerLocation))
+
+#if WITH_EDITOR
 	else
 	{
 		// DEBUG visualisation BLACK. The Player is NOT moving
@@ -125,6 +132,8 @@ void AAudioSpline::Tick(float DeltaTime)
 			}
 		}
 	}
+#endif // #if WITH_EDITOR
+
 
 	/*
 	*	Logic for playing and stopping the Main Audio Component and slowing down the tick 
@@ -259,7 +268,6 @@ bool AAudioSpline::IsJumpDetected()
 // Dual Source Function - Print to the Output Log the biggest jump detected during PIE (Play In Editor) 
 void AAudioSpline::JumpScanner()
 {
-#if WITH_EDITOR
 	// Temporary distance between old and current source position
 	float TempJump = FVector::Dist(CurrentSourcePosition, OldSourcePosition);
 	// Update LargestJumpSoFar If the distance previously calculated is greater than its current value 
@@ -269,16 +277,13 @@ void AAudioSpline::JumpScanner()
 	}
 	// Print to the output log the biggest jump so far
 	UE_LOG(LogTemp, Warning, TEXT("%s The biggest jump so far is: %f"), *GetName(), LargestJumpSoFar);
-#endif // #if WITH_EDITOR
 }
 
 // Draw Debug sphere based on the Audio Component Location. WHITE means the player IS moving. Black means the player is NOT moving
 void AAudioSpline::Debug(const FVector DebugLocation, FColor Color) const
 {
-#if WITH_EDITOR
 	// The life-time of the sphere is set to be tick + 0.01 in order to avoid a flashing effect
 	DrawDebugSphere(GetWorld(), DebugLocation, 100.0f, 16, Color, false, PrimaryActorTick.TickInterval + 0.01);
 	DrawDebugSphere(GetWorld(), DebugLocation, Range, 32, Color, false, PrimaryActorTick.TickInterval + 0.01);
-#endif // #if WITH_EDITOR
 }
 

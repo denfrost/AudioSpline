@@ -31,45 +31,46 @@ public:
 	// Function called every frame on this Actor
 	virtual void Tick(float DeltaTime) override;
 
-	// The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. 
-	// Otherwise the sound fades-in.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.1"))
-	float Range{ 15000.0f };
-
 	// User-defined Tick interval
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio Spline | Setup")
 	float UpdateInterval{ 0.15f };
 
 	// Tick interval when the player is not in range. This value should be greater than UpdateInterval
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio Spline | Setup")
 	float SlowInterval{ 0.5f };
+
+	// The sound is stopped If the distance between the Player and the Audio Component is greater than the Range. 
+	// Otherwise the sound fades-in.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.1"), Category = "Audio Spline | Setup")
+	float Range{ 15000.0f };
+
 
 	// Draw a sphere around the active audio sources. 
 	// There will be an inner sphere to quickly visualise the sound and an outer sphere that represents the Range described above.
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Audio Spline | Setup")
 	bool bDebug{ false };
 
 	// The DualSource spawns a new Audio Source if the closest location on the spline jumps above a threshold.
 	// Do not update this bool during PIE(Play In Editor)
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio Spline | Dual Source")
 	bool bAllowDualSource{ false };
 
 	// Play the Audio Source If the difference between the old and the current source position is greater than JumpThreshold. 
 	// Use the Jump Scanner to find a value that suits your needs. If a Jump is detected it will be printed out into the Output Log.
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"), Category = "Audio Spline | Dual Source")
 	float JumpThreshold{ 1000.0f };
 
 	// Print to the Output Log the biggest jump detected during PIE (Play In Editor). 
 	// This will help you decide which value to put onto the Jump Threshold.
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, meta = (EditCondition = "bAllowDualSource"))
+	UPROPERTY(EditAnywhere, meta = (EditCondition = "bAllowDualSource"), Category = "Audio Spline | Dual Source")
 	bool bAllowJumpScanner{ false };
 
 	// Volume of BOTH Audio Components when the Dual Source is spawned  
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"), Category = "Audio Spline | Dual Source")
 	float AdjustedVolume{ 0.75f };
 
 	// How quick the Main Audio Component is going to fade/adjust its volume when Dual Audio Component spawns OR get killed
-	UPROPERTY(Category = "Dual Source Mode", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bAllowDualSource"), meta = (ClampMin = "0.0"), Category = "Audio Spline | Dual Source")
 	float AdjustedVolumeDuration{ 0.5f };
 
 
