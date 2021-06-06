@@ -72,7 +72,7 @@ Draw a sphere around the active audio sources. There will be an inner sphere to 
 
 If true, it enables the Dual Source Mode. 
 The DualSource spawns a new Audio Source if the closest location on the spline jumps above a threshold.
-Do not update this bool during PIE(Play In Editor)
+Do not update this bool during PIE (Play In Editor)
 
 #### Jump Threshold
 
