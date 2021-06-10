@@ -24,7 +24,7 @@ If you don’t have a Plugins folder in your project folder yet, just create one
 You will be able to see it in the Editor only if you toggle the "Show Plugin Content" on the "View Options".
 
 ## How to use the Plugin
-There are two ways of using this tool. You can simply use the C++ Actor or you can create a Blueprint class out of it.
+There are two ways of using this tool. You can simply use the C++ Actor or you can create a Blueprint class from the C++ Actor.
 
 ### Using the C++ Actor
 Drag the AudioSpline Actor into the world and add as many spline points as you need.
